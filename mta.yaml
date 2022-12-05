@@ -1,0 +1,69 @@
+_schema-version: '3.1'
+ID: s4h-bp-app
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx -p @sap/cds-dk cds build --production
+modules:
+  - name: s4h-bp-app-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: s4h-bp-app-uaa
+      - name: s4h-bp-app-destination
+      # Required for on-premise connectivity only
+      - name: s4h-bp-app-connectivity
+
+  - name: s4h-bp-app
+    type: approuter.nodejs
+    path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: s4h-bp-app-uaa
+
+resources:
+  - name: s4h-bp-app-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        #xsappname: s4h-bp-app-${org}-${space}  #if org name has spaces/special chars then can't use
+        xsappname: s4h-bp-app
+        tenant-mode: dedicated
+
+  - name: s4h-bp-app-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  # Required for on-premise connectivity only
+  - name: s4h-bp-app-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
