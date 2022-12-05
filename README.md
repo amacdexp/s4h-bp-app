@@ -21,7 +21,9 @@ File or Folder | Purpose
 
 
 
+## SSH
 
+```
 ### Ensure SSH is enabled for the application you want to remote debug
 ### The easiest way to check is to execute
 cf ssh s4h-bp-app-srv -i <instance_number>
@@ -35,9 +37,10 @@ cf disable-ssh s4h-bp-app-srv
 ### Port forwarding sample usage:
 cf ssh s4h-bp-app-srv  -T -c 'kill -USR1 $(pidof node)'
 cf ssh -N -L 9229:127.0.0.1:9229 s4h-bp-app-srv
+```
 
-
-### Run and debug
+## Run and debug
+```
 launch.json:
     {
       "name": "attach to CF on port 9229",
@@ -52,6 +55,17 @@ Debug console:
 cds.version
 process.ppid
 process.env.
+
+```
+
+## Setting up HYBRID testing
+```
+cf create-service-key s4h-bp-app-uaa s4h-bp-app-uaa-key;
+cf create-service-key s4h-bp-app-destination s4h-bp-app-destination-key;
+cds bind -2 s4h-bp-app-uaa,s4h-bp-app-destination,s4h-bp-app-connectivity
+
+cds watch --profile hybrid
+```
 
 ## Learn More
 
