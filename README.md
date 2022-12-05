@@ -115,7 +115,7 @@ cds watch --profile hybrid
 
 ![Alt text](/screengrabs/BAS_HYBRID_LOCAL_OUTPUT.png?raw=true "Hybrid localhost 4004 output")
 
-![Alt text](/screengrabs/BTP_CF_APPROUTER_APP?raw=true "Access Via the CF Approuter application... requires authentication")
+![Alt text](/screengrabs/BTP_CF_APPROUTER_APP.png?raw=true "Access Via the CF Approuter application... requires authentication")
 
 ![Alt text](/screengrabs/BTP_CF_APPROUTER_SUPPLIERS.png?raw=true "CF Approuter App can display list of on-premise S4H SUPPLIERS")
 
