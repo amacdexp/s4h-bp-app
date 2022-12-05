@@ -68,6 +68,15 @@ https://help.sap.com/docs/EXCISE_TAX/14d4836ce4ae4a2cb12de79dc593a87d/d7fba360fd
 /n/iwfnd/maint_service
 ```
 
+## Destination example config
+
+NOTE: Cloud Connector needed exposing on-premise to BTP Subaccount.
+
+e.g.
+![Alt text](/screengrabs/SCC_ompremise.png?raw=true "CAL S4H demo system, exposted on HTTP port, to avoid SSL/Cert issues")
+
+
+
 ## Setting up HYBRID testing
 ```
 cf create-service-key s4h-bp-app-uaa s4h-bp-app-uaa-key;
