@@ -73,7 +73,7 @@ https://help.sap.com/docs/EXCISE_TAX/14d4836ce4ae4a2cb12de79dc593a87d/d7fba360fd
 NOTE: Cloud Connector needed exposing on-premise to BTP Subaccount.
 
 e.g.
-![Alt text](/screengrabs/SCC_ompremise.png?raw=true "CAL S4H demo system, exposted on HTTP port, to avoid SSL/Cert issues")
+![Alt text](/screengrabs/SCC_onpremise.png?raw=true "CAL S4H demo system, exposted on HTTP port, to avoid SSL/Cert issues")
 
 
 
