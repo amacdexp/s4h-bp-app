@@ -68,16 +68,19 @@ https://help.sap.com/docs/EXCISE_TAX/14d4836ce4ae4a2cb12de79dc593a87d/d7fba360fd
 /n/iwfnd/maint_service
 ```
 
+![Alt text](/screengrabs/S4H_ADD_SERVICE.png?raw=true "CAL S4H demo on-pmreise system, expose/add the API_BUSINESS_PARTNER service")
+
+
 ## Destination example config
 
-NOTE: Cloud Connector needed exposing on-premise to BTP Subaccount.
+NOTE: Cloud Connector needed exposing on-premise to a BTP Subaccount.
 
-e.g.
 ![Alt text](/screengrabs/SCC_onpremise.png?raw=true "CAL S4H demo system, exposted on HTTP port, to avoid SSL/Cert issues")
 
+![Alt text](/screengrabs/BTP_SUBACCOUNT_DEST.png?raw=true "Example Destination 'calS4H'  setup on subaccount")
 
 
-## Setting up HYBRID testing
+## [Optional] Set up HYBRID testing
 ```
 cf create-service-key s4h-bp-app-uaa s4h-bp-app-uaa-key;
 cf create-service-key s4h-bp-app-destination s4h-bp-app-destination-key;
@@ -85,6 +88,17 @@ cds bind -2 s4h-bp-app-uaa,s4h-bp-app-destination,s4h-bp-app-connectivity
 
 cds watch --profile hybrid
 ```
+
+## Test Results on BAS Hybrid and  CF
+
+![Alt text](/screengrabs/BAS_CDS_HYBRID.png?raw=true "'cds watch --profile hybrid'     output for reference")
+
+![Alt text](/screengrabs/BAS_HYBRID_LOCAL_OUTPUT.png?raw=true "Hybrid localhost 4004 output")
+
+![Alt text](/screengrabs/BTP_CF_APPROUTER_APP?raw=true "Access Via the CF Approuter application... requires authentication")
+
+![Alt text](/screengrabs/BTP_CF_APPROUTER_SUPPLIERS.png?raw=true "CF Approuter App can display list of on-premise S4H SUPPLIERS")
+
 
 ## Learn More
 
